@@ -26,7 +26,7 @@
 		else if(result.equals("false")){
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('비밀번호가 틀립니다.')");
+			script.println("alert('비밀번호가 틀렸습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
@@ -34,7 +34,7 @@
 		else if(result.equals("noId")){
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('존재하지 않는 아이디 입니다.')");
+		script.println("alert('아이디가 없습니다.')");
 		script.println("history.back()");
 		script.println("</script>");
 		}

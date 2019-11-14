@@ -17,8 +17,7 @@ public class DBConnect {
 	public DBConnect() {
 
 	}
-	
-	private String dbURL = "jdbc:mysql://localhost:3306/randompassword?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"; // localhost:3306 포트는 컴퓨터설치된 mysql주소
+	private String dbURL = "jdbc:mysql://localhost:3307/randompassword?serverTimezone=UTC"; // localhost:3307 포트는 나스에 설치된 db주소
 	private String dbID = "android";
 	private String dbPassword = "android";
 	private Connection conn; // connection:db에접근하게 해주는 객체
@@ -31,9 +30,9 @@ public class DBConnect {
 	
 	public String findPw(String id) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			sql = "select id, pw from user where id=?";
+			sql = "select id, pw from users where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -56,9 +55,9 @@ public class DBConnect {
 	
 	public String update(String id, String pwd) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			sql = "update user set pw=? where id=?";
+			sql = "update users set pw=? where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pwd);
 			pstmt.setString(2, id);
@@ -78,9 +77,9 @@ public class DBConnect {
 	
 	public String joindb(String id, String pwd) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			sql = "select id from user where id=?";
+			sql = "select id from users where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
@@ -89,7 +88,7 @@ public class DBConnect {
 					returns = "fail";
 				} 
 			} else { // 입력한 아이디가 없는 경우
-				sql2 = "insert into user (id,pw) values(?,?)";
+				sql2 = "insert into users (id,pw) values(?,?)";
 				pstmt2 = conn.prepareStatement(sql2);
 				pstmt2.setString(1, id);
 				pstmt2.setString(2, pwd);
@@ -111,9 +110,9 @@ public class DBConnect {
 
 	public String logindb(String id, String pwd) {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
-			sql = "select id, pw from user where id=?";
+			sql = "select id, pw from users where id=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
