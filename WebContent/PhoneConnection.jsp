@@ -9,7 +9,7 @@
 	//로그인 요청인지 회원가입 요청인지를 구분하여 메서드를 실행하도록합니다.
 	//싱글톤 방식으로 자바 클래스를 불러옵니다.
 	
-	DBConnect connectDB = DBConnect.getInstance();
+	DBConnect connectDB = new DBConnect();
 	
 	if(type.equals("login")) {
 		String returns = connectDB.logindb(id, pwd);
